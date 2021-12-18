@@ -1,4 +1,4 @@
-﻿namespace IceCreamDataBaseSignalRTest.DataTypes;
+﻿namespace TwitchIrcHubClient.DataTypes;
 
 public class IrcMessage
 {

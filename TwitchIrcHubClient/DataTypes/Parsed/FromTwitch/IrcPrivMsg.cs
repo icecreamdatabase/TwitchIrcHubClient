@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace IceCreamDataBaseSignalRTest.DataTypes.Parsed.FromTwitch;
+namespace TwitchIrcHubClient.DataTypes.Parsed.FromTwitch;
 
 [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]

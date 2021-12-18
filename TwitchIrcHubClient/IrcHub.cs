@@ -1,16 +1,16 @@
-﻿using IceCreamDataBaseSignalRTest.DataTypes.Parsed.FromTwitch;
-using Microsoft.AspNetCore.SignalR.Client;
+﻿using Microsoft.AspNetCore.SignalR.Client;
+using TwitchIrcHubClient.DataTypes.Parsed.FromTwitch;
 
 namespace TwitchIrcHubClient;
 
 public class IrcHub
 {
     private readonly HubConnection _hubConnection;
-    
+
     public delegate void Reconnected(string? arg);
 
     public event Reconnected? OnReconnected;
-    
+
     public delegate void Closed(Exception? exception);
 
     public event Closed? OnClosed;
@@ -77,7 +77,7 @@ public class IrcHub
 
         _hubConnection.StartAsync();
     }
-    
+
     private async Task HubConnectionOnReconnected(string? arg)
     {
         Console.WriteLine($"Reconnected: {arg}");
