@@ -11,8 +11,8 @@ public class IrcGlobalUserState
     /* --------------------------------------------------------------------------- */
     /* ------------------------------ Required tags ------------------------------ */
     /* --------------------------------------------------------------------------- */
-    public Dictionary<string, int> BadgeInfo { get; init; } = null!;
-    public Dictionary<string, int> Badges { get; init; } = null!;
+    public Dictionary<string, string> BadgeInfo { get; init; } = null!;
+    public Dictionary<string, string> Badges { get; init; } = null!;
     public string Color { get; init; } = null!;
     public string DisplayName { get; init; } = null!;
     public string[] EmoteSets { get; init; } = null!;
