@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 
-namespace TwitchIrcHubClient.InternalApi.Connections;
+namespace TwitchIrcHubClient.TwitchIrcHubApi.Connections;
 
 [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
 internal class ConnectionRequestInput

@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TwitchIrcHubClient.InternalApi.TwitchUsers;
+namespace TwitchIrcHubClient.TwitchIrcHubApi.TwitchUsers;
 
 public class TwitchUsersResult
 {

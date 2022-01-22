@@ -1,14 +1,18 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.SignalR.Client;
+using TwitchIrcHubClient.TwitchIrcHubApi;
 
 namespace TwitchIrcHubClient;
 
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
 public class IrcHubClient
 {
+    [SuppressMessage("ReSharper", "PrivateFieldCanBeConvertedToLocalVariable")]
     private readonly HubConnection _hubConnection;
     public IncomingIrcEvents IncomingIrcEvents { get; }
     public OutgoingIrcEvents OutgoingIrcEvents { get; }
+    public InternalApi Api { get; }
 
     public IrcHubClient(string appIdKey)
     {
@@ -16,6 +20,8 @@ public class IrcHubClient
             .WithUrl($"https://botapitest.icdb.dev/IrcHub?appIdKey={appIdKey}")
             .WithAutomaticReconnect(new EndlessRetryPolicy())
             .Build();
+
+        Api = new InternalApi(appIdKey);
         
         IncomingIrcEvents = new IncomingIrcEvents(_hubConnection);
         OutgoingIrcEvents = new OutgoingIrcEvents(_hubConnection);

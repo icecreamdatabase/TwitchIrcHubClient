@@ -1,8 +1,10 @@
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.SignalR.Client;
 using TwitchIrcHubClient.DataTypes.Parsed.FromTwitch;
 
 namespace TwitchIrcHubClient;
 
+[SuppressMessage("ReSharper", "EventNeverSubscribedTo.Global")]
 public class IncomingIrcEvents
 {
     public delegate void Reconnected(string? arg);
