@@ -14,10 +14,10 @@ public class IrcHubClient
     public OutgoingIrcEvents OutgoingIrcEvents { get; }
     public InternalApi Api { get; }
 
-    public IrcHubClient(string appIdKey)
+    public IrcHubClient(string appIdKey, string hubRootUri)
     {
         _hubConnection = new HubConnectionBuilder()
-            .WithUrl($"https://botapitest.icdb.dev/IrcHub?appIdKey={appIdKey}")
+            .WithUrl($"{hubRootUri}/IrcHub?appIdKey={appIdKey}")
             .WithAutomaticReconnect(new EndlessRetryPolicy())
             .Build();
 
