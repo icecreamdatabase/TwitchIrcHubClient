@@ -19,54 +19,84 @@ public class IncomingIrcEvents
 
     public event ConnId? OnConnId;
 
-    public delegate void NewIrcClearMsg(IrcClearMsg ircClearMsg);
+    public delegate void NewIrcClearMsg(int botUserId, IrcClearMsg ircClearMsg);
 
     public event NewIrcClearMsg? OnNewIrcClearMsg;
 
-    public delegate void NewIrcClearChat(IrcClearChat ircClearChat);
+    public delegate void NewIrcClearChat(int botUserId, IrcClearChat ircClearChat);
 
     public event NewIrcClearChat? OnNewIrcClearChat;
 
-    public delegate void NewIrcGlobalUserState(IrcGlobalUserState ircGlobalUserState);
+    public delegate void NewIrcGlobalUserState(int botUserId, IrcGlobalUserState ircGlobalUserState);
 
     public event NewIrcGlobalUserState? OnNewIrcGlobalUserState;
 
-    public delegate void NewIrcHostTarget(IrcHostTarget ircHostTarget);
+    public delegate void NewIrcHostTarget(int botUserId, IrcHostTarget ircHostTarget);
 
     public event NewIrcHostTarget? OnNewIrcHostTarget;
 
-    public delegate void NewIrcNotice(IrcNotice ircNotice);
+    public delegate void NewIrcNotice(int botUserId, IrcNotice ircNotice);
 
     public event NewIrcNotice? OnNewIrcNotice;
 
-    public delegate void NewIrcPrivMsg(IrcPrivMsg ircPrivMsg);
+    public delegate void NewIrcPrivMsg(int botUserId, IrcPrivMsg ircPrivMsg);
 
     public event NewIrcPrivMsg? OnNewIrcPrivMsg;
 
-    public delegate void NewIrcRoomState(IrcRoomState ircRoomState);
+    public delegate void NewIrcRoomState(int botUserId, IrcRoomState ircRoomState);
 
     public event NewIrcRoomState? OnNewIrcRoomState;
 
-    public delegate void NewIrcUserNotice(IrcUserNotice ircUserNotice);
+    public delegate void NewIrcUserNotice(int botUserId, IrcUserNotice ircUserNotice);
 
     public event NewIrcUserNotice? OnNewIrcUserNotice;
 
-    public delegate void NewIrcUserState(IrcUserState ircUserState);
+    public delegate void NewIrcUserState(int botUserId, IrcUserState ircUserState);
 
     public event NewIrcUserState? OnNewIrcUserState;
 
     public IncomingIrcEvents(HubConnection hubConnection)
     {
-        hubConnection.On<string>("ConnId", connId => OnConnId?.Invoke(connId));
-        hubConnection.On<IrcClearMsg>("NewIrcClearMsg", ircClearMsg => OnNewIrcClearMsg?.Invoke(ircClearMsg));
-        hubConnection.On<IrcClearChat>("NewIrcClearChat", ircClearChat => OnNewIrcClearChat?.Invoke(ircClearChat));
-        hubConnection.On<IrcGlobalUserState>("NewIrcGlobalUserState", ircGlobalUserState => OnNewIrcGlobalUserState?.Invoke(ircGlobalUserState));
-        hubConnection.On<IrcHostTarget>("NewIrcHostTarget", ircHostTarget => OnNewIrcHostTarget?.Invoke(ircHostTarget));
-        hubConnection.On<IrcNotice>("NewIrcNotice", ircNotice => OnNewIrcNotice?.Invoke(ircNotice));
-        hubConnection.On<IrcPrivMsg>("NewIrcPrivMsg", ircPrivMsg => OnNewIrcPrivMsg?.Invoke(ircPrivMsg));
-        hubConnection.On<IrcRoomState>("NewIrcRoomState", ircRoomState => OnNewIrcRoomState?.Invoke(ircRoomState));
-        hubConnection.On<IrcUserNotice>("NewIrcUserNotice", ircUserNotice => OnNewIrcUserNotice?.Invoke(ircUserNotice));
-        hubConnection.On<IrcUserState>("NewIrcUserState", ircUserState => OnNewIrcUserState?.Invoke(ircUserState));
+        hubConnection.On<string>(
+            "ConnId",
+            connId => OnConnId?.Invoke(connId)
+        );
+        hubConnection.On<int, IrcClearMsg>(
+            "NewIrcClearMsg",
+            (botUserId, ircClearMsg) => OnNewIrcClearMsg?.Invoke(botUserId, ircClearMsg)
+        );
+        hubConnection.On<int, IrcClearChat>(
+            "NewIrcClearChat",
+            (botUserId, ircClearChat) => OnNewIrcClearChat?.Invoke(botUserId, ircClearChat)
+        );
+        hubConnection.On<int, IrcGlobalUserState>(
+            "NewIrcGlobalUserState",
+            (botUserId, ircGlobalUserState) => OnNewIrcGlobalUserState?.Invoke(botUserId, ircGlobalUserState)
+        );
+        hubConnection.On<int, IrcHostTarget>(
+            "NewIrcHostTarget",
+            (botUserId, ircHostTarget) => OnNewIrcHostTarget?.Invoke(botUserId, ircHostTarget)
+        );
+        hubConnection.On<int, IrcNotice>(
+            "NewIrcNotice",
+            (botUserId, ircNotice) => OnNewIrcNotice?.Invoke(botUserId, ircNotice)
+        );
+        hubConnection.On<int, IrcPrivMsg>(
+            "NewIrcPrivMsg",
+            (botUserId, ircPrivMsg) => OnNewIrcPrivMsg?.Invoke(botUserId, ircPrivMsg)
+        );
+        hubConnection.On<int, IrcRoomState>(
+            "NewIrcRoomState",
+            (botUserId, ircRoomState) => OnNewIrcRoomState?.Invoke(botUserId, ircRoomState)
+        );
+        hubConnection.On<int, IrcUserNotice>(
+            "NewIrcUserNotice",
+            (botUserId, ircUserNotice) => OnNewIrcUserNotice?.Invoke(botUserId, ircUserNotice)
+        );
+        hubConnection.On<int, IrcUserState>(
+            "NewIrcUserState",
+            (botUserId, ircUserState) => OnNewIrcUserState?.Invoke(botUserId, ircUserState)
+        );
     }
 
     protected internal void HubConnectionOnReconnected(string? arg) => OnReconnected?.Invoke(arg);

@@ -29,7 +29,7 @@ public class IrcUserNotice
     /* --------------------- Non-tag but still required data --------------------- */
     /* --------------------------------------------------------------------------- */
     public string RoomName { get; init; } = null!;
-    public string UserName { get; init; } = null!;
+    public string? UserInput { get; init; }
 
     /* --------------------------------------------------------------------------- */
     /* ----------------------------- Conditional tags ---------------------------- */
