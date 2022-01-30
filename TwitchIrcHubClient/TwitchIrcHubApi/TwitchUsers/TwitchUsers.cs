@@ -14,8 +14,11 @@ public class TwitchUsers
 
     private const string ControllerUri = "http://localhost:4721/TwitchUsers";
 
-    public async Task<List<TwitchUsersResult>> Users(IEnumerable<string> ids, IEnumerable<string> logins)
+    public async Task<List<TwitchUsersResult>> Users(IEnumerable<string>? ids, IEnumerable<string>? logins)
     {
+        ids ??= Enumerable.Empty<string>();
+        logins ??= Enumerable.Empty<string>();
+
         string queryString = ControllerUri + new QueryBuilder { { "id", ids }, { "login", logins } };
 
         List<TwitchUsersResult>? twitchUsersResult =

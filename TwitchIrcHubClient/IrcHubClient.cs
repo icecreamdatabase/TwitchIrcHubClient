@@ -6,10 +6,11 @@ namespace TwitchIrcHubClient;
 
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
 [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
-public class IrcHubClient
+public class IrcHubClient : IDisposable
 {
     [SuppressMessage("ReSharper", "PrivateFieldCanBeConvertedToLocalVariable")]
     private readonly HubConnection _hubConnection;
+
     public IncomingIrcEvents IncomingIrcEvents { get; }
     public OutgoingIrcEvents OutgoingIrcEvents { get; }
     public InternalApi Api { get; }
@@ -22,7 +23,7 @@ public class IrcHubClient
             .Build();
 
         Api = new InternalApi(appIdKey);
-        
+
         IncomingIrcEvents = new IncomingIrcEvents(_hubConnection);
         OutgoingIrcEvents = new OutgoingIrcEvents(_hubConnection);
 
@@ -41,9 +42,20 @@ public class IrcHubClient
 
     private Task HubConnectionOnClosed(Exception? exception)
     {
-        Console.WriteLine($"Closed: {exception}");
+        Console.WriteLine(
+            exception == null
+                ? "HubConnection closed."
+                : $"HubConnection closed with Exception: {exception}"
+        );
         IncomingIrcEvents.HubConnectionOnClosed(exception);
         return Task.CompletedTask;
+    }
+
+    public async void Dispose()
+    {
+        GC.SuppressFinalize(this);
+        await _hubConnection.StopAsync();
+        await _hubConnection.DisposeAsync();
     }
 }
 
