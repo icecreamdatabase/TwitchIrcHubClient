@@ -53,6 +53,8 @@ public class IrcUserNotice
     public UserNoticeRitualName? MsgParamRitualName { get; init; }
     public string? MsgParamThreshold { get; init; }
     public string? MsgParamGiftMonths { get; init; }
+    public string? MsgParamMassGiftCount { get; init; }
+    public string? MsgParamOriginId { get; init; }
 }
 
 public enum UserNoticeMessageId
@@ -69,7 +71,8 @@ public enum UserNoticeMessageId
     Raid,
     Unraid,
     Ritual,
-    BitsBadgeTier
+    BitsBadgeTier,
+    PrimePaidUpgrade
 }
 
 public enum UserNoticeRitualName
