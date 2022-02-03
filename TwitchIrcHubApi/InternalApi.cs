@@ -9,10 +9,10 @@ public class InternalApi
     public readonly Connections.Connections Connections;
     public readonly TwitchUsers.TwitchUsers TwitchUsers;
 
-    internal InternalApi(string appIdKey)
+    internal InternalApi(string appIdKey, string hubRootUri)
     {
         _httpClient.DefaultRequestHeaders.Authorization = AuthenticationHeaderValue.Parse(appIdKey);
-        Connections = new Connections.Connections(_httpClient);
-        TwitchUsers = new TwitchUsers.TwitchUsers(_httpClient);
+        Connections = new Connections.Connections(_httpClient, hubRootUri);
+        TwitchUsers = new TwitchUsers.TwitchUsers(_httpClient, hubRootUri);
     }
 }

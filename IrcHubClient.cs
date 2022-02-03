@@ -22,7 +22,7 @@ public class IrcHubClient : IDisposable
             .WithAutomaticReconnect(new EndlessRetryPolicy())
             .Build();
 
-        Api = new InternalApi(appIdKey);
+        Api = new InternalApi(appIdKey, hubRootUri);
 
         IncomingIrcEvents = new IncomingIrcEvents(_hubConnection);
         OutgoingIrcEvents = new OutgoingIrcEvents(_hubConnection);
