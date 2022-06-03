@@ -21,7 +21,7 @@ public class IrcUserNotice
     public string? Message { get; init; }
     public UserNoticeMessageId MessageId { get; init; }
     public int RoomId { get; init; }
-    public string SystemMessage { get; init; } = null!;
+    public string? SystemMessage { get; init; }
     public DateTime TmiSentTs { get; init; }
     public int UserId { get; init; }
 
